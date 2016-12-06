@@ -16,10 +16,13 @@
 * Explosion
 * Barrel moving
 * Turret
+
 ### Static mesh
 * Simple tank comprising tracks, body, turret, and barrel.
+
 ### Textures
 * Add for visual flare
+
 ### Music
 * Background music to create tension.
 
