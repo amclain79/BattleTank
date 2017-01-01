@@ -16,6 +16,7 @@
 * Explosion
 * Barrel moving
 * Turret
+* Engine sound
 
 ### Static mesh
 * Simple tank comprising tracks, body, turret, and barrel.
