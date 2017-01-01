@@ -1,4 +1,4 @@
-# Battle Tank
+# Battle Tank GDD
 ## Concept
 * An open-world head-to-head tank combat game.
 * The terrain will be used for tactical advantage.
