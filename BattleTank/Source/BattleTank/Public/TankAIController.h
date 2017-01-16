@@ -14,10 +14,10 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-public:
-	ATank* GetControlledTank() const;	// const means reference connot alter controlled tank
-
+private:
 	virtual void BeginPlay() override;	// virtual means children can override (append) function
 										// BeginPlay() is an AActor method	
-	
+	ATank* GetControlledTank() const;	// const means reference connot alter controlled tank
+
+	ATank* GetPlayerTank() const;
 };
