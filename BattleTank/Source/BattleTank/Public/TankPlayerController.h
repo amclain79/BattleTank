@@ -19,4 +19,8 @@ public:
 	
 	virtual void BeginPlay() override;	// virtual means children can override (append) function
 										// BeginPlay() is an AActor method
+	virtual void Tick(float DeltaTime) override;
+	
+private:
+	void AimTowardsCrosshair();	// Moves barrel to crosshair
 };
