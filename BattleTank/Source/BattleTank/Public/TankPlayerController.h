@@ -17,5 +17,6 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 public:
 	ATank* GetControlledTank() const;	// const means reference connot alter controlled tank
 	
-	
+	virtual void BeginPlay() override;	// virtual means children can override (append) function
+										// BeginPlay() is an AActor method
 };
