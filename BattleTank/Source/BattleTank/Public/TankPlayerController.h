@@ -23,4 +23,7 @@ public:
 	
 private:
 	void AimTowardsCrosshair();	// Moves barrel to crosshair
+
+	// Return an OUT parameter, true if hit landscape
+	bool GetSightRayHitLocation(FVector& HitLocation) const; // return location of where we would hit in landscape
 };
