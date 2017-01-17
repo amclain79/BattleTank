@@ -11,6 +11,9 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
+	void AimAt(FVector HitLocation);
+
+private:
 	// Sets default values for this pawn's properties
 	ATank();
 
@@ -21,8 +24,6 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
-	
+	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;	
 	
 };
