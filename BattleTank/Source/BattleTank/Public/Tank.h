@@ -14,6 +14,10 @@ class BATTLETANK_API ATank : public APawn
 public:
 	void AimAt(FVector HitLocation);
 
+	// Creates a method that we can call via tank blueprint
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
 protected: // Need to access via UPROPERTY, but not part of tank interface
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
