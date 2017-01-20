@@ -26,7 +26,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (!Barrel) { return; }
 
 	UObject* WorldContextObject = this;
-	FVector OutLaunchVelocity;
+	FVector OutLaunchVelocity = FVector(0.0f);
 	// Reference Projectile socket on tank_fbx_Barrel 
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
@@ -36,6 +36,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 	// Calculate OutLaunchVelocity
@@ -45,7 +48,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Have Aim Solution"), Time);
+		UE_LOG(LogTemp, Warning, TEXT("%f: Have Aim Solution %s"), Time, *AimDirection.ToString());
 	}
 	else
 	{

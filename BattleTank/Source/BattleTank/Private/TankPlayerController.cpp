@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Tank.h"
 #include "BattleTank.h"
 #include "TankPlayerController.h"
 
@@ -32,7 +33,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
-	FVector HitLocation; // Out parameter
+	FVector HitLocation = FVector(0.0f); // Out parameter
 	
 	if (GetSightRayHitLocation(HitLocation))
 	{
@@ -47,14 +48,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
+	FVector LookDirection = FVector(0.0f);
+	GetLookDirection(ScreenLocation, LookDirection);
 
-	FVector LookDirection;
-	if (GetLookDirection(ScreenLocation, LookDirection))
-	{
-		// Line-trace along that LookDirection, and see what we hit (up to max range)
-		GetLookVectorHitLocation(LookDirection, HitLocation);
-	}	
-	return true;
+	// Line-trace along that LookDirection, and see what we hit (up to max range)
+	return GetLookVectorHitLocation(LookDirection, HitLocation);
+
 }
 
 // "De-project" the ScreenLocation of the crosshair to a LookDirection
@@ -76,7 +75,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	auto StartLocation = PlayerCameraManager->GetCameraLocation();
 	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
 	// if we hit anything visible within range, set it's hit location and return true
-	if (GetWorld()->LineTraceSingleByChannel(
+	if (GetWorld()->LineTraceSingleByChannel
+	(
 			HitResult,
 			StartLocation,
 			EndLocation,
@@ -86,7 +86,6 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		HitLocation = HitResult.Location;
 		return true;
 	}
-	// otherwise set hit location to 0 and return false
-	HitLocation = FVector(0.0f);
+
 	return false; //Line trace didn't succeed
 }

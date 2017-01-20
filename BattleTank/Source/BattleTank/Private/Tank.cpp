@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "TankAimingComponent.h"
 #include "BattleTank.h"
 #include "Tank.h"
 
@@ -37,5 +38,5 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 void ATank::AimAt(FVector HitLocation)
 {
 	//Delegate to TankAimingComponent
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);	
 }
