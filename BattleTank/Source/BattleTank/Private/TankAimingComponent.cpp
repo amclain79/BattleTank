@@ -36,9 +36,39 @@ void UTankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, 
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation)
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	auto OurTankName = GetOwner()->GetName();
-	auto BarrelLocation = Barrel->GetComponentLocation();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation.ToString());
+	// Protect Barrel reference
+	if (!Barrel) { return; }
+
+	UObject* WorldContextObject = this;
+	FVector OutLaunchVelocity;
+	// Reference Projectile socket on tank_fbx_Barrel 
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	bool bHighArc = false; // favor the lower arc.
+	float CollisionRadius = 0.0f; //Radius of the projectile (assumed spherical), used when tracing
+	float OverrideGravityZ = 0; // do not override
+	const FCollisionResponseParams ResponseParam; //ignoring
+	const TArray < AActor * > ActorsToIgnore;	  //ignoring
+	bool bDrawDebug = false; // no debug line
+	// Calculate OutLaunchVelocity
+	if (UGameplayStatics::SuggestProjectileVelocity(
+				WorldContextObject,
+				OutLaunchVelocity,
+				StartLocation,
+				HitLocation,
+				LaunchSpeed,
+				bHighArc,
+				CollisionRadius,
+				OverrideGravityZ,
+				ESuggestProjVelocityTraceOption::DoNotTrace,
+				ResponseParam,
+				ActorsToIgnore,
+				bDrawDebug))
+	{
+		// Convert OutLaunchVelocity to unit vector
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		auto TankName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+	}
 }
