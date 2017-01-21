@@ -46,3 +46,9 @@ void ATank::AimAt(FVector HitLocation)
 	//Delegate to TankAimingComponent
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);	
 }
+
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Fire!"), Time);
+}
