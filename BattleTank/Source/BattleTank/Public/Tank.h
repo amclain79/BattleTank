@@ -7,6 +7,7 @@
 
 class UTankAimingComponent;
 class UTankBarrel;
+class UTankTurret;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -19,6 +20,9 @@ public:
 	// Creates a method that we can call via tank blueprint
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
 
 protected: // Need to access via UPROPERTY, but not part of tank interface
 	UTankAimingComponent* TankAimingComponent = nullptr;

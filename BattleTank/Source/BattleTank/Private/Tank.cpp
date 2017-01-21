@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "TankAimingComponent.h"
 #include "BattleTank.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 
 
@@ -19,6 +19,12 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	// Delegate
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
+void ATank::SetTurretReference(UTankTurret* TurretToSet)
+{
+	// Delegate
+	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
 // Called when the game starts or when spawned
