@@ -30,7 +30,7 @@ public:
 
 protected: // Need to access via UPROPERTY, but not part of tank interface
 	UTankAimingComponent* TankAimingComponent = nullptr;
-
+	
 private:
 	// Sets default values for this pawn's properties
 	ATank();
