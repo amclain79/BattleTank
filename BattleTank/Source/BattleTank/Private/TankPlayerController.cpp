@@ -7,15 +7,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();	// Calls parent class
-	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankPlayerController Not Possesing Tank"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("TankPlayerController Possesing %s"), *(ControlledTank->GetName()));
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
