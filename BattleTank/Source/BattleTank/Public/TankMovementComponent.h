@@ -12,8 +12,11 @@ UCLASS()
 class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 {
 	GENERATED_BODY()
-	
-	
+
+public:
+	// Throw is how far forward or backward the thumbstick is moved
+	UFUNCTION(BlueprintCallable, Category = Input)
+	void IntendMoveForward(float Throw);
 	
 	
 };
