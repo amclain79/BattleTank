@@ -18,4 +18,7 @@ private:
 	virtual void BeginPlay() override;	// virtual means children can override (append) function
 										// BeginPlay() is an AActor method	
 	virtual void Tick(float DeltaTime) override;
+
+	// How close the AI tank can get to player
+	float AcceptanceRadius = 3000;
 };

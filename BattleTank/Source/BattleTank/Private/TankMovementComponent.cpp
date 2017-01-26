@@ -10,6 +10,15 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 	RightTrack = RightTrackToSet;
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	// Replacing Super functionality
+	auto Time = GetWorld()->GetTimeSeconds();
+	auto Name = GetOwner()->GetName();
+	auto MoveVelocityString = MoveVelocity.ToString();
+	UE_LOG(LogTemp, Warning, TEXT("%f: %s MoveVelocity %s"), Time, *Name, *MoveVelocityString);
+}
+
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	if (!LeftTrack || !RightTrack) { return; }
