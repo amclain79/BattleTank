@@ -15,12 +15,16 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	// Replacing Super functionality	
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+
 	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
 	IntendMoveForward(ForwardThrow);
+
+	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
+	IntendTurnRight(RightThrow);
 	
 	//auto Time = GetWorld()->GetTimeSeconds();
 	//auto Name = GetOwner()->GetName();
-	//UE_LOG(LogTemp, Warning, TEXT("%f: %s MoveVelocity %s"), Time, *Name, *MoveVelocityString);
+	//UE_LOG(LogTemp, Warning, TEXT("%f: %s RightThrow.Z %f"), Time, *Name, RightThrow.Z);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)

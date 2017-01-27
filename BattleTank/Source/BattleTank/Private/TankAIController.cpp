@@ -24,6 +24,6 @@ void ATankAIController::Tick(float DeltaTime)
 		// Aim towards the player
 		ControlledTank->AimAt(PlayerTank->GetActorLocation());
 
-		ControlledTank->Fire(); // TODO don't fire every frame
+		//ControlledTank->Fire(); // TODO don't fire every frame
 	}
 }
