@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2 Real Studios
 
 #include "BattleTank.h"
 #include "TankTrack.h"
@@ -24,7 +24,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	
 	//auto Time = GetWorld()->GetTimeSeconds();
 	//auto Name = GetOwner()->GetName();
-	//UE_LOG(LogTemp, Warning, TEXT("%f: %s RightThrow.Z %f"), Time, *Name, RightThrow.Z);
+	//UE_LOG(LogTemp, Warning, TEXT("%f: %s RightThrow: %f ForwardThrow: %f"), Time, *Name, RightThrow, ForwardThrow);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
@@ -32,7 +32,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-	//TODO Prevent double speed due to dual control use
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
@@ -40,5 +39,4 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
-	//TODO Prevent double speed due to dual control use
 }
