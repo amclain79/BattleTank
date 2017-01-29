@@ -30,6 +30,7 @@ public:
 	void Fire();
 
 protected: // Need to access via UPROPERTY, but not part of tank interface
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
 private:

@@ -13,10 +13,11 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
-private:
+protected: //so that the subclass blueprint can access
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;	// const means reference connot alter controlled tank
-	
+
+private:
 	virtual void BeginPlay() override;	// virtual means children can override (append) function
 										// BeginPlay() is an AActor method
 	virtual void Tick(float DeltaTime) override;	
