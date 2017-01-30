@@ -22,7 +22,9 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
-
+	//auto Time = GetWorld()->GetTimeSeconds();
+	auto Name = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ BeginPlay"), *Name);
 }
 
 void ATank::AimAt(FVector HitLocation)
