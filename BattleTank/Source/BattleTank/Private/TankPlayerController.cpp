@@ -1,7 +1,6 @@
 // Copyright 2 Real Studios
 
 #include "BattleTank.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankPlayerController.h"
 
@@ -9,7 +8,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();	// Calls parent class
 
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	FoundAimingComponent(AimingComponent);
 }
@@ -20,20 +19,17 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	// needed in case you die and depossess tank
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 
 	FVector HitLocation = FVector(0.0f); // Out parameter
 	
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
+		AimingComponent->AimAt(HitLocation);
 	}
 }
 
@@ -49,7 +45,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 
 	// Line-trace along that LookDirection, and see what we hit (up to max range)
 	return GetLookVectorHitLocation(LookDirection, HitLocation);
-
 }
 
 // "De-project" the ScreenLocation of the crosshair to a LookDirection

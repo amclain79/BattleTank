@@ -5,7 +5,6 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"	// Put new includes above
 
-class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurret;
 class AProjectile;
@@ -16,15 +15,9 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 public:
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
-protected: // Need to access via UPROPERTY, but not part of tank interface
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-	
 private:
 	// Sets default values for this pawn's properties
 	ATank();

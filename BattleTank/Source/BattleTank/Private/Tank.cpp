@@ -1,7 +1,6 @@
 // Copyright 2 Real Studios
 
 #include "BattleTank.h"
-#include "TankAimingComponent.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "Tank.h"
@@ -17,16 +16,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FVector HitLocation)
-{
-	// protect pointer
-	if (!ensure(TankAimingComponent)) { return; }
-	//Delegate to TankAimingComponent
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);	
 }
 
 void ATank::Fire()
