@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include "TankAimingComponent.h"
 
+EFiringState UTankAimingComponent::GetFiringState() const { return FiringState; }
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
