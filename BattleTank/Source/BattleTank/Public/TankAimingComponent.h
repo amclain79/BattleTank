@@ -11,7 +11,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 // Forward Declaration. Use instead of #include "UTankBarrel". Prevents duplicate insert of .h files.
@@ -27,6 +28,9 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 public:	
 	EFiringState GetFiringState() const;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetRoundsLeft() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -67,4 +71,6 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection = FVector(0.0f);
+
+	int RoundsLeft = 3;
 };
