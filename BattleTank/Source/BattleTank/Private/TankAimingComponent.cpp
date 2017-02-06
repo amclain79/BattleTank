@@ -7,7 +7,7 @@
 #include "TankAimingComponent.h"
 
 EFiringState UTankAimingComponent::GetFiringState() const { return FiringState; }
-int UTankAimingComponent::GetRoundsLeft() const { return RoundsLeft; }
+int32 UTankAimingComponent::GetRoundsLeft() const { return RoundsLeft; }
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
