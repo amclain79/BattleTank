@@ -22,6 +22,11 @@ private:
 		UPrimitiveComponent* OtherComponent, FVector NormalImpulse,
 		const FHitResult& Hit);
 
+	void OnTimerExpire();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	float DestroyDelay = 10.f;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
