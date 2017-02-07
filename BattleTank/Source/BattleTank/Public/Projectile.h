@@ -24,8 +24,11 @@ private:
 
 	void OnTimerExpire();
 
-	UPROPERTY(EditDefaultsOnly, Category = "Components")
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float DestroyDelay = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float ProjectileDamage = 20.f;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
