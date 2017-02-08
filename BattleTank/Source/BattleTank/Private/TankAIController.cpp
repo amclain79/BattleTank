@@ -2,12 +2,34 @@
 
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
+#include "Tank.h" // for implementing OnDeath()
 #include "TankAIController.h"
 // Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();	// Calls parent class
+}
+
+void ATankAIController::SetPawn(APawn * InPawn)
+{
+	// Don't get in the way of parent class
+	Super::SetPawn(InPawn);
+
+	if (InPawn) 
+	{ 
+		auto PossessedTank = Cast<ATank>(InPawn);
+
+		if (!ensure(PossessedTank)) { return; }
+
+		// register as an observer for ATank::OnDeath
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
+	}
+}
+
+void ATankAIController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("ATankAIController::OnTankDeath"))
 }
 
 void ATankAIController::Tick(float DeltaTime)
@@ -28,7 +50,5 @@ void ATankAIController::Tick(float DeltaTime)
 	if (AimingComponent->GetFiringState() == EFiringState::Locked)
 	{
 		AimingComponent->Fire();
-	}
-	
-	
+	}	
 }
