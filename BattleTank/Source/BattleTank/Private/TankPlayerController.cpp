@@ -86,7 +86,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 
 void ATankPlayerController::OnTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("ATankPlayerController::OnTankDeath"))
+	StartSpectatingOnly();
 }
 
 void ATankPlayerController::SetPawn(APawn * InPawn)
